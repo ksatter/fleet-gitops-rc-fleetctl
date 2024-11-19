@@ -1,4 +1,4 @@
-#! usr/bin/bash
+#! /usr/bin/env bash
 
 #FLEET_VERSION="$(curl "$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
