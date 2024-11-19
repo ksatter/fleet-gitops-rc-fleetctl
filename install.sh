@@ -2,6 +2,8 @@
 
 FLEET_VERSION="$(curl "https://$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
+echo $FLEET_VERSION 
+
 BRANCH=$(echo "$FLEET_VERSION" | jq -r '.branch')
 VERSION=$(echo "$FLEET_VERSION" | jq -r '.version')
 REVISION=$(echo "$FLEET_VERSION" | jq -r '.revision')
