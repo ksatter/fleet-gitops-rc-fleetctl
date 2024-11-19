@@ -1,6 +1,6 @@
 #! usr/bin/env bash    
 
-FLEET_VERSION="$(curl "https://$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
+FLEET_VERSION="$(curl "https://${FLEET_URL}/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
 echo $FLEET_VERSION 
 
