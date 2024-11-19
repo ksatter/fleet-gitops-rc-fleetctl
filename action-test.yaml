@@ -1,0 +1,20 @@
+ #! /bin/bash    
+
+
+FLEET_VERSION_RESPONSE="$(curl "https://${1}.fleetdm.com/version" --fail --silent)"
+
+FLEET_BRANCH=$(echo "$FLEET_VERSION_RESPONSE" | jq -r '.branch')
+FLEET_VERSION=$(echo "$FLEET_VERSION_RESPONSE" | jq -r '.version')
+FLEET_REVISION=$(echo "$FLEET_VERSION_RESPONSE" | jq -r '.revision')
+
+echo ${FLEET_BRANCH:0:2}
+
+if [[ -z "${FLEET_VERSION_RESPONSE}" ]]; then 
+  echo "Failed to get Fleet version from $FLEET_URL, installing latest version of fleetctl"
+    #npm install -g fleetctl
+elif [[ "${FLEET_BRANCH:0:2}" == "rc" ]]; then 
+   echo "rc version"
+else
+  echo "install version"
+  # npm install -g "fleetctl@$FLEET_VERSION" || npm install -g fleetctl
+fi

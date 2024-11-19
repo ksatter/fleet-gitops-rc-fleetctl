@@ -21,22 +21,31 @@ runs:
       run: |
         FLEET_VERSION="$(curl "$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent | jq --raw-output '.version')"
 
-        if [[ -n "$FLEET_VERSION" ]] ; then
-          npm install -g "fleetctl@$FLEET_VERSION" || npm install -g fleetctl
-        else
+        BRANCH=$(echo "$FLEET_VERSION" | jq -r '.branch')
+        VERSION=$(echo "$FLEET_VERSION" | jq -r '.version')
+        REVISION=$(echo "$FLEET_VERSION" | jq -r '.revision')
+
+        echo ${FLEET_BRANCH:0:2}
+
+        if [[ -z "${FLEET_VERSION}" ]]; then 
           echo "Failed to get Fleet version from $FLEET_URL, installing latest version of fleetctl"
-          npm install -g fleetctl
+            #npm install -g fleetctl
+        elif [[ "${BRANCH:0:2}" == "rc" ]]; then 
+          echo "rc version detected"
+        else
+          echo "install version"
+          # npm install -g "fleetctl@$FLEET_VERSION" || npm install -g fleetctl
         fi
 
-    - name: Configure fleetctl
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: fleetctl config set --address ${{ env.FLEET_URL }} --token ${{ env.FLEET_API_TOKEN }}
+    # - name: Configure fleetctl
+    #   shell: bash
+    #   working-directory: ${{ inputs.working-directory }}
+    #   run: fleetctl config set --address ${{ env.FLEET_URL }} --token ${{ env.FLEET_API_TOKEN }}
 
-    - name: Run fleetctl gitops commands
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      env:
-        FLEET_DRY_RUN_ONLY: ${{ inputs.dry-run-only }}
-        FLEET_DELETE_OTHER_TEAMS: ${{ inputs.delete-other-teams }}
-      run: ./gitops.sh
+    # - name: Run fleetctl gitops commands
+    #   shell: bash
+    #   working-directory: ${{ inputs.working-directory }}
+    #   env:
+    #     FLEET_DRY_RUN_ONLY: ${{ inputs.dry-run-only }}
+    #     FLEET_DELETE_OTHER_TEAMS: ${{ inputs.delete-other-teams }}
+    #   run: ./test.sh
