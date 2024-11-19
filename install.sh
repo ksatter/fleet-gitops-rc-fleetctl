@@ -2,12 +2,12 @@
 
 #FLEET_VERSION="$(curl "$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
-FLEET_VERSION="$(curl "nveval.cloud.fleetdm.com/version" --fail --silent)"
+FLEET_VERSION="$(curl "https://nveval.cloud.fleetdm.com/version" --fail --silent)"
 
 
 echo $FLEET_VERSION 
 
-if [[ -z "${FLEET_VERSION}" ]]; then 
+if [[ (-z "${FLEET_VERSION}" ) ]]; then 
   echo "Failed to get Fleet version from $FLEET_URL, installing latest version of fleetctl"
   npm install -g fleetctl
   exit
