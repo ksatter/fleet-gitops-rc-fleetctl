@@ -16,7 +16,7 @@ BRANCH=$(echo "$FLEET_VERSION" | jq -r '.branch')
 VERSION=$(echo "$FLEET_VERSION" | jq -r '.version')
 REVISION=$(echo "$FLEET_VERSION" | jq -r '.revision')
 
-fi [[ "${BRANCH:0:2}" == "rc" ]]; then 
+if [[ "${BRANCH:0:2}" == "rc" ]]; then 
   git clone https://github.com/fleetdm/fleet.git --single-branch $BRANCH
   cd fleet
   git reset --hard $REVISION
