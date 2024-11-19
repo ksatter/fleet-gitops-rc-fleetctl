@@ -1,4 +1,4 @@
-#! usr/bin/env bash    
+#! usr/bin/bash
 
 #FLEET_VERSION="$(curl "$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
@@ -22,7 +22,7 @@ fi [[ "${BRANCH:0:2}" == "rc" ]]; then
   git reset --hard $REVISION
   make deps
   make fleetctl
-
+  
 else
   echo "install version"
   # npm install -g "fleetctl@$FLEET_VERSION" || npm install -g fleetctl
