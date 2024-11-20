@@ -2,7 +2,7 @@
 
 #FLEET_VERSION="$(curl "$FLEET_URL/api/v1/fleet/version" --header "Authorization: Bearer $FLEET_API_TOKEN" --fail --silent)"
 
-FLEET_VERSION="$(curl "nveval.cloud.fleetdm.com/version" --fail --silent)"
+FLEET_VERSION="$(curl "https://nveval.cloud.fleetdm.com/version" --fail --silent)"
 
 VERSION=$(echo "$FLEET_VERSION" | jq -r '.version' || echo "")
 echo $VERSION
@@ -22,6 +22,8 @@ else
     git reset --hard $REVISION
     make deps
     make fleetctl
+
+    ls -a ./build
 
   else
 
