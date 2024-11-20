@@ -22,7 +22,7 @@ else
     git reset --hard $REVISION
     make fleetctl
 
-    mv ./build/fleetctl /usr/bin
+   sudo mv ./build/fleetctl /usr/bin
 
     fleetctl -v
     
