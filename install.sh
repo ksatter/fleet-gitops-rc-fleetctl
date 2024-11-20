@@ -19,10 +19,10 @@ else
 
     git clone https://github.com/fleetdm/fleet.git --single-branch $BRANCH
     cd $BRANCH
-    git reset --hard $REVISION
+    git reset --hard 13ca79f
     make fleetctl
 
-   sudo mv ./build/fleetctl /usr/bin
+    sudo mv ./build/fleetctl /usr/bin
 
     fleetctl -v
     
