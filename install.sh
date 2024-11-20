@@ -20,11 +20,12 @@ else
     git clone https://github.com/fleetdm/fleet.git --single-branch $BRANCH
     cd $BRANCH
     git reset --hard $REVISION
-    make deps
     make fleetctl
 
-    ls -a ./build
+    mv ./build/fleetctl /usr/bin
 
+    fleetctl -v
+    
   else
 
     echo "install version"
