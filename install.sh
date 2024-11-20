@@ -5,6 +5,7 @@
 FLEET_VERSION="$(curl "nveval.cloud.fleetdm.com/version" --fail --silent)"
 
 VERSION=$(echo "$FLEET_VERSION" | jq -r '.version' || echo false)
+echo $VERSION
 
 if [[ (-z "${VERSION}" ) ]]; then 
   echo "Failed to get Fleet version from $FLEET_URL, installing latest version of fleetctl"
