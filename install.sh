@@ -4,7 +4,7 @@
 
 FLEET_VERSION="$(curl "nveval.cloud.fleetdm.com/version" --fail --silent)"
 
-VERSION=$(echo "$FLEET_VERSION" | jq -r '.version' || echo false)
+VERSION=$(echo "$FLEET_VERSION" | jq -r '.version' || echo "")
 echo $VERSION
 
 if [[ (-z "${VERSION}" ) ]]; then 
