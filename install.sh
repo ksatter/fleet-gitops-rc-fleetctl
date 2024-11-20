@@ -18,7 +18,7 @@ else
   if [[ "${BRANCH:0:2}" == "rc" ]]; then 
 
     git clone https://github.com/fleetdm/fleet.git --single-branch $BRANCH
-    cd fleet
+    cd $BRANCH
     git reset --hard $REVISION
     make deps
     make fleetctl
